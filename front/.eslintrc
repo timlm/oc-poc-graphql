@@ -1,0 +1,76 @@
+{
+	"extends": [
+		"react-app",
+		"react-app/jest"
+	],
+	"globals": {
+		"browser": true
+	},
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true
+	},
+	"rules": {
+		"prefer-template": "error",
+		"indent": [
+			"error",
+			4
+		],
+		"no-extra-semi": "error",
+		"import/order": [
+			"error",
+			{
+				"groups": [
+					"builtin",
+					"external",
+					"internal"
+				],
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "external",
+						"position": "before"
+					}
+				],
+				"pathGroupsExcludedImportTypes": [
+					"react"
+				],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		],
+		"quotes": [
+			"error",
+			"double"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"no-shadow": [
+			"error"
+		],
+		"comma-dangle": [
+			"error",
+			"never"
+		],
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+		"curly": [
+			"error"
+		],
+		"brace-style": [
+			"error"
+		],
+		"array-bracket-spacing": [
+			"error",
+			"always"
+		]
+	}
+}
