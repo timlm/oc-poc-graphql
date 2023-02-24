@@ -1,24 +1,14 @@
+import cors from "cors";
+import articleRouter from "./router";
+
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 
 const app = express();
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-const schema = buildSchema(`
-    type Query {
-        message: String
-    }
-`);
-
-const root = {
-    message: () => 'Hello World!'
-};
-
-app.use('/graphql', graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true
-}));
+articleRouter(app);
 
 app.listen(3002, () => console.log('Express GraphQL Server Now Running On localhost:3002/graphql'));
 

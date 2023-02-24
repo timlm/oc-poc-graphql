@@ -1,0 +1,9 @@
+import {ApolloClient, InMemoryCache} from "@apollo/client";
+
+const graphqlClient = new ApolloClient({
+    // uri: 'https://flyby-router-demo.herokuapp.com',
+    uri: 'http://localhost:3002/graphql',
+    cache: new InMemoryCache(),
+});
+
+export default graphqlClient;

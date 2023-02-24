@@ -1,27 +1,19 @@
 import {useState} from "react";
-import { restClient, graphqlClient } from "./config/axios";
+import restClient from "./config/axios";
+import graphqlClient from "./config/apollo";
 import './App.css'
+import {ApolloProvider, gql} from "@apollo/client";
+import HomeRest from "./domain/rest/page/home-rest";
+import HomeGraphql from "./domain/graphql/page/home-graphql";
 
 function App() {
-    const [result, setResult] = useState();
-
-    const sendRestRequest = async (endpoint: string) => {
-        const result = await restClient.get(endpoint);
-        setResult(result?.data);
-        console.log(result)
-    };
-
-    const sendGraphqlRequest = async (endpoint: string) => {
-        const result = await graphqlClient.get(endpoint);
-        setResult(result?.data);
-        console.log(result)
-    };
 
     return (
         <div className="App">
-            <button onClick={() => sendRestRequest("rest")}>click Rest</button>
-            <button onClick={() => sendGraphqlRequest("graphql")}>click GraphQL</button>
-            <p>{result}</p>
+            <ApolloProvider client={graphqlClient}>
+                <HomeRest/>
+                <HomeGraphql/>
+            </ApolloProvider>
         </div>
     )
 }
