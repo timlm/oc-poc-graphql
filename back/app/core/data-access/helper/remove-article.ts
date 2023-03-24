@@ -12,7 +12,7 @@ const removeArticle = async (id: number) => {
         }
 
         const articles = JSON.parse(await (read_file(data_path)));
-        const found_article = articles.findIndex((articleFound: any) => articleFound.id === id);
+        const found_article = articles.findIndex((articleFound: any) => Number(articleFound.id) === Number(id));
         if (found_article !== -1) {
             articles.splice(found_article, 1);
             await write_file(data_path, JSON.stringify(articles, null, 4));

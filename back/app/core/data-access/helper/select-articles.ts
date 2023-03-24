@@ -4,7 +4,6 @@ const read_file = util.promisify(fs.readFile);
 const data_path = `${__dirname}/data/articles.json` ;
 
 const selectArticles = async (params: any) => {
-    console.log(params);
     const { type, price } = params;
     try {
         let result = JSON.parse(await (read_file(data_path)));

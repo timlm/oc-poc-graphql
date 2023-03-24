@@ -1,0 +1,20 @@
+ul {
+  list-style-type: none;
+}
+
+.article-list__content {
+  padding: 15px;
+}
+
+.article-list__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 15px;
+  padding: 10px;
+  box-shadow: 0 2px 4px 7px #201e1e;
+  width: 600px;
+};
+
+.article-list__row--action{
+  cursor: pointer;
+}

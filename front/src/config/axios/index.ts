@@ -5,7 +5,7 @@ import axios from "axios";
  */
 
 const restClient = axios.create({
-    baseURL: "http://localhost:3001/",
+    baseURL: "http://localhost:3001/rest",
     timeout: 30000,
     withCredentials: true,
     validateStatus: status => status < 400

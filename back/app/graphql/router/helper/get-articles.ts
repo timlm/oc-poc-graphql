@@ -1,4 +1,4 @@
-import selectArticles from "../../data-access/helper/select-articles";
+import selectArticles from "../../../core/data-access/helper/select-articles";
 
 const getArticles = (params: any) => {
     const { type, price } = params;

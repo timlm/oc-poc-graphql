@@ -1,4 +1,4 @@
-import selectArticle from "../../data-access/helper/select-article";
+import selectArticle from "../../../core/data-access/helper/select-article";
 
 const getArticle = (params: any) => {
     const { id } = params;

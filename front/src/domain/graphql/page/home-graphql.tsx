@@ -1,47 +1,34 @@
 import type { FunctionComponent } from "react";
-import {gql, useLazyQuery, useQuery} from "@apollo/client";
-import {useState} from "react";
+import {gql, useLazyQuery, useMutation} from "@apollo/client";
+import ArticleList from "../../core/article-list/article-list";
+import DefaultTemplate from "../../core/template/default-template";
+import "./home-graphql.scss";
 
-const GET_POSTS = gql`
-  query GetPosts {
-    posts {
+const GET_ARTICLES = gql`
+  query getArticles {
+    articles {
       id
-      author
-      body
-    }
-  }
-`;
-
-const GET_POSTS_FILTER = gql`
-  query GetPosts($author: String) {
-    posts(author: $author) {
-      id
-      author
-      body
+      title
+      type
+      price
     }
   }
 `;
 
 const HomeGraphql: FunctionComponent = () => {
-    const [result, setResult] = useState();
-    const [getPosts, { data }] = useLazyQuery(GET_POSTS);
-    const [getPostsFilter, { data: postsFiltered }] = useLazyQuery(GET_POSTS_FILTER, { variables: { author: "John" }});
+    const [getArticles, { data: articlesResponse, refetch }] = useLazyQuery(GET_ARTICLES);
 
     const sendGraphqlRequest = async () => {
-        await getPosts();
-    }
-
-    const sendPostsFilter = async () => {
-        await getPostsFilter();
+        await refetch();
     }
 
     return (
-        <div>
-            <button onClick={() => sendGraphqlRequest()}>click GraphQL</button>
-            <button onClick={() => sendPostsFilter()}>click GraphQL 2 </button>
-            <p>{JSON.stringify(data)}</p>
-            <p>{JSON.stringify(postsFiltered)}</p>
-        </div>
+        <DefaultTemplate title={"Get Article GraphQL"}>
+            <div className="home-graphql">
+                <button onClick={() => sendGraphqlRequest()}>get Articles GraphQL</button>
+                <ArticleList type="graphql" articles={articlesResponse?.articles} handleRefresh={refetch}/>
+            </div>
+        </DefaultTemplate>
     );
 };
 

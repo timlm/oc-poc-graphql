@@ -1,21 +1,26 @@
 import type { FunctionComponent } from "react";
 import restClient from "../../../config/axios";
 import {useState} from "react";
+import ArticleList from "../../core/article-list/article-list";
+import DefaultTemplate from "../../core/template/default-template";
+import "./home-rest.scss";
 
 const HomeRest: FunctionComponent = () => {
 
-    const [result, setResult] = useState();
+    const [result, setResult] = useState([]);
 
-    const sendRestRequest = async (endpoint: string) => {
-        const result = await restClient.get(endpoint);
+    const sendRestRequest = async () => {
+        const result = await restClient.get("/articles");
         setResult(result?.data);
-        console.log(result)
     };
+
     return (
-        <div>
-            <button onClick={() => sendRestRequest("rest")}>click Rest</button>
-            <p>{result}</p>
-        </div>
+        <DefaultTemplate title="Get Article REST">
+            <div className="home-rest">
+                <button onClick={() => sendRestRequest()}>get Articles Rest</button>
+                <ArticleList type="rest" articles={result} handleRefresh={sendRestRequest}/>
+            </div>
+        </DefaultTemplate>
     );
 };
 
